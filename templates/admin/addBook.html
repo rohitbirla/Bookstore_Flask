@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Book | Bestseller Book Store{% endblock %}
+
+{% block body %}
+<div class="row pad">
+	<div class="col-lg-12">
+		<h2 class="bold text-center">Add New Book To The Inventory</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-10 col-lg-offset-1">
+		<div class="panel panel-default">
+			<form method="POST" action="{{url_for('add')}}" enctype="multipart/form-data">
+				<div class="panel-body">
+					<div class="row">
+						{{ form.csrf_token }}
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Book Name</label>
+								{{ form.name(class='form-control')}}
+							
+							</div>
+
+							<div class="form-group">
+								<label>Book Price</label>
+								{{form.price(class='form-control')}}
+							</div>
+
+							<div class="form-group">
+								<label>Opening Stock</label>
+								
+								{{form.stock(class='form-control')}}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<div class="form-group">
+									<label>Description</label>
+									{{ form.description(class='form-control') }}
+								</div>
+								
+								<label>Book Image</label>
+								{{ form.image(class='form-control') }}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-plus-sign"></i> Save Book
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

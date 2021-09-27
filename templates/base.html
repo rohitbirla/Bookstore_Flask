@@ -13,11 +13,6 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='bs/css/flatly.min.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <title>Adoption</title>
     <style type="text/css">
         body{
             background-image:url("../static/imgs/Background.jpg");
@@ -60,9 +55,10 @@
 
     </head>
     <body >
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <{% if admin %}
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
-               
+                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -70,26 +66,60 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./"><h1>Bestseller Book Store</h1></a>
+                    <a class="navbar-brand" href="../">Bestseller Book Store</a>
                 </div>
         
-            
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="{{ url_for('admin') }}"><i class="glyphicon glyphicon-dashboard"></i> Admin Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('add') }}"><i class="glyphicon glyphicon-plus-sign"></i> Add Book</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('index') }}"><i class="glyphicon glyphicon-chevron-left"></i> Back To Front</a>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </nav>
+        {% else %}
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="./">Bestseller Book Store</a>
+                </div>
+        
+                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active">
                             <a href="cart.html">
-                                <i class="glyphicon glyphicon-shopping-cart"></i> Cart (1)
+                                <i class="glyphicon glyphicon-shopping-cart"></i> Cart (4)
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div><!-- /.navbar-collapse -->
             </div>
         </nav>
+        {% endif %}
+
+        <div class="container" id="page">
+
     {% block content %}
 
     {% endblock %}
-
-        
-        <script src="" async defer></script>
+       <script src="{{ url_for('static', filename='bs/js/jquery.min.js') }}"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="{{ url_for('static', filename='bs/js/bootstrap.min.js') }}"></script>
     </body>
 </html>
