@@ -1,0 +1,6 @@
+projectKey=Bookstore_flask
+serverUrl=http://localhost:9000
+serverVersion=9.1.0.47736
+dashboardUrl=http://localhost:9000/dashboard?id=Bookstore_flask
+ceTaskId=AXwljfzZlCC7oXVk6DLH
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXwljfzZlCC7oXVk6DLH
