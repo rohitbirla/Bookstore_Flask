@@ -23,3 +23,10 @@ configure_uploads(app, photos)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+
+from Bookstore.admin.views import admin_blueprint
+
+app.register_blueprint(admin_blueprint,url_prefix='/admin')
+
+

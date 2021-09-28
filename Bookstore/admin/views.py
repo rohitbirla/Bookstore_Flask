@@ -10,4 +10,4 @@ admin_blueprint = Blueprint('admin',__name__,template_folder='templates/admin')
 @admin_blueprint.route('/add', methods=['GET', 'POST'])
 def add():
     form = AddBook()
-    return render_template('admin/addBook.html',admin=True,form=form)
+    return render_template('admin/addBook.html',form=form)
