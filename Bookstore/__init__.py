@@ -2,8 +2,7 @@ from flask import Flask, render_template,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_uploads import UploadSet, configure_uploads, IMAGES
-from flask_wtf import FlaskForm
-from wtforms import StringField,IntegerField,TextAreaField
+
 
 import os
 
