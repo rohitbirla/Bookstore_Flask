@@ -23,240 +23,36 @@
 </div>
 
 
-<div class="row">
-	
-	<div class="col-lg-3">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="thumbnail">
-				<a href="https://www.amazon.in/Atomic-Habits-Proven-Build-Break-ebook/dp/B01N5AX61W/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=1632669650&sr=8-1">
-					<img src="../static/imgs/atomic.jpg" alt="">
-				</a>
-				<div class="caption text-center">
-					<h4 class="bold">Atomic Habits</h4>
-					<p>
-						This is the amazing book
-					</p>
-					<hr />
-					<p>
-						<a href="#" class="btn btn-primary btn-long">
-							<i class="glyphicon glyphicon-eye-open"></i> View
-						</a>
-						
-						<a href="#" class="btn btn-default btn-lg">
-							<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
-						</a>
-						
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="col-lg-3">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="thumbnail">
-				<a href="https://www.amazon.in/400-Days-Chetan-Bhagat-ebook/dp/B099Z83WSN/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=1632669820&sr=8-1">
-					<img src="../static/imgs/chetan.jpg" alt="">
-				</a>
-				<div class="caption text-center">
-					<h4 class="bold">Chetan Bhagat 400 Days</h4>
-					<p>
-						This is the amazing book
-					</p>
-					<hr />
-					<p>
-						<a href="#" class="btn btn-primary btn-lg">
-							<i class="glyphicon glyphicon-eye-open"></i> View
-						</a>
-						
-						<a href="#" class="btn btn-default btn-lg">
-							<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
-						</a>
-						
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="col-lg-3">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="thumbnail">
-				<a href="https://www.amazon.in/Ikigai-Japanese-secret-long-happy-ebook/dp/B073D36KNM/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=1632669856&sr=8-1">
-					<img src="../static/imgs/ikigia.jpg" alt="">
-				</a>
-				<div class="caption text-center">
-					<h4 class="bold">Ikigai</h4>
-					<p>
-						This is the amazing book
-					</p>
-					<hr />
-					<p>
-						<a href="#" class="btn btn-primary btn-lg">
-							<i class="glyphicon glyphicon-eye-open"></i> View
-						</a>
-						
-						<a href="#" class="btn btn-default btn-lg">
-							<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
-						</a>
-						
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-lg-3">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="thumbnail">
-				<a href="https://www.amazon.in/Psychology-Money-Morgan-Housel-ebook/dp/B08FHZ5L47/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=1632669904&sr=8-1">
-					<img src="../static/imgs/Psycology.jpg" alt="">
-				</a>
-				<div class="caption text-center">
-					<h4 class="bold">The Psycology of Money</h4>
-					<p>
-						This is the amazing book
-					</p>
-					<hr />
-					<p>
-						<a href="#" class="btn btn-primary btn-lg">
-							<i class="glyphicon glyphicon-eye-open"></i> View
-						</a>
-						
-						<a href="#" class="btn btn-default btn-lg">
-							<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
-						</a>
-						
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-</div>
-
-
 
 <div class="row">
-	
+	{% for book in books %}
 	<div class="col-lg-3">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="thumbnail">
-				<a href="https://www.amazon.in/Lets-Talk-Money-Youve-Worked-ebook/dp/B07DCHR9GG/ref=reads_cwrtbar_5/257-1028699-8379101?pd_rd_w=YjJ3p&pf_rd_p=8fdaa95f-a9e0-4a06-968f-c431439eafe4&pf_rd_r=DVNGFVMGD5BWKS4NVN2S&pd_rd_r=9a1ee463-8be9-437c-8690-195915cbbe82&pd_rd_wg=nGLNy&pd_rd_i=B07DCHR9GG&psc=1">
-					<img src="../static/imgs/monika.jpg" alt="">
+				<a href="{{ url_for('book', id=book.id) }}">
+					<img src="{{ book.image }}" alt="">
 				</a>
 				<div class="caption text-center">
-					<h4 class="bold">Lets talk Money</h4>
+					<h4 class="bold">{{ book.name }}</h4>
 					<p>
-						This is the amazing book
+						{{ book.description }}
 					</p>
 					<hr />
 					<p>
-						<a href="#" class="btn btn-primary btn-lg">
+						<a href="{{ url_for('book', id=book.id) }}" class="btn btn-primary btn-sm">
 							<i class="glyphicon glyphicon-eye-open"></i> View
 						</a>
-						
-						<a href="#" class="btn btn-default btn-lg">
+						{% if book.stock > 0 %}
+						<a href="#" class="btn btn-default btn-sm">
 							<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
 						</a>
-						
+						{% endif %}
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-	<div class="col-lg-3">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="thumbnail">
-				<a href="https://www.amazon.in/Richest-Engineer-Abhishek-Kumar-ebook/dp/B071SKGZVB/ref=reads_cwrtbar_5/257-1028699-8379101?pd_rd_w=YGqZP&pf_rd_p=8fdaa95f-a9e0-4a06-968f-c431439eafe4&pf_rd_r=0QJ6SMXXEDMBDF6BFVK6&pd_rd_r=1e1df021-bf02-429b-850c-f18448e173f4&pd_rd_wg=a0mL4&pd_rd_i=B071SKGZVB&psc=1">
-					<img src="../static/imgs/engineer.jpg" alt="">
-				</a>
-				<div class="caption text-center">
-					<h4 class="bold">The Richest Engineer</h4>
-					<p>
-						This is the amazing book
-					</p>
-					<hr />
-					<p>
-						<a href="#" class="btn btn-primary btn-lg">
-							<i class="glyphicon glyphicon-eye-open"></i> View
-						</a>
-						
-						<a href="#" class="btn btn-default btn-lg">
-							<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
-						</a>
-						
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="col-lg-3">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="thumbnail">
-				<a href="https://www.amazon.in/Dream-Big-Your-Financial-Plan-ebook/dp/B075CV84GM/ref=reads_cwrtbar_11/257-1028699-8379101?pd_rd_w=ffIYn&pf_rd_p=8fdaa95f-a9e0-4a06-968f-c431439eafe4&pf_rd_r=SQ94SNH4KB4XH2DR1S47&pd_rd_r=50edca4e-0c98-43c6-b9d0-2f2999440edd&pd_rd_wg=ba3Ep&pd_rd_i=B075CV84GM&psc=1">
-					<img src="../static/imgs/dream.jpg" alt="">
-				</a>
-				<div class="caption text-center">
-					<h4 class="bold">Dream Big</h4>
-					<p>
-						This is the amazing book
-					</p>
-					<hr />
-					<p>
-						<a href="#" class="btn btn-primary btn-lg">
-							<i class="glyphicon glyphicon-eye-open"></i> View
-						</a>
-						
-						<a href="#" class="btn btn-default btn-lg">
-							<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
-						</a>
-						
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-lg-3">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="thumbnail">
-				<a href="https://www.amazon.in/dp/1250220548/ref=sspa_dk_detail_1?psc=1&pd_rd_i=1250220548p13NParams&smid=A3H3WE9M6NY1KV&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyOEQ5QkdQR1dEVU1EJmVuY3J5cHRlZElkPUEwMjcxNDY2M0JHMkMzSTZGRUVPSSZlbmNyeXB0ZWRBZElkPUEwMDk4NzA0TVlYRENQU1RWR05RJndpZGdldE5hbWU9c3BfZGV0YWlsJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==">
-					<img src="../static/imgs/sucess.jpg" alt="">
-				</a>
-				<div class="caption text-center">
-					<h4 class="bold">Success</h4>
-					<p>
-						This is the amazing book
-					</p>
-					<hr />
-					<p>
-						<a href="#" class="btn btn-primary btn-lg">
-							<i class="glyphicon glyphicon-eye-open"></i> View
-						</a>
-						
-						<a href="#" class="btn btn-default btn-lg">
-							<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
-						</a>
-						
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
+	{% endfor %}
 </div>
 
 {% endblock %}
