@@ -1,14 +1,56 @@
-from Bookstore import app,db,photos
-from flask import render_template,redirect,url_for
-from Bookstore.forms import AddBook,AddToCart
-from Bookstore.models import Book
+from flask import Flask,redirect,render_template,url_for
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_uploads import UploadSet, configure_uploads, IMAGES
+from flask_wtf import FlaskForm
+from wtforms import StringField,IntegerField,SubmitField,TextAreaField,HiddenField
+from flask_uploads import UploadSet, configure_uploads
+from flask_wtf.file import FileField, FileAllowed
 
 
+app = Flask(__name__)
+
+photos = UploadSet('photos', IMAGES)
+
+app.config['UPLOADED_PHOTOS_DEST'] = 'images'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trendy.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'mysecret'
+
+configure_uploads(app, photos)
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+class Book(db.Model):
+    
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+    price = db.Column(db.Integer) #in cents
+    stock = db.Column(db.Integer)
+    description = db.Column(db.String(500))
+    image = db.Column(db.String(100))
+
+
+class AddBook(FlaskForm):
+    name = StringField('Name')
+    price = IntegerField('Price')
+    stock = IntegerField('Stock')
+    description = TextAreaField('Description')
+    image = FileField('Image', validators=[FileAllowed(IMAGES, 'Only images are accepted.')])
+    submit = SubmitField('Save')
+
+class AddToCart(FlaskForm):
+    quantity = IntegerField('Quantity')
+    id = HiddenField('ID')
 
 @app.route('/')
 def index():
+    books=Book.query.all()
     
-    return render_template('index.html')
+    return render_template('index.html',books=books)
 
 
 @app.route('/book/<id>')
@@ -41,4 +83,6 @@ def add():
 
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
+
+
