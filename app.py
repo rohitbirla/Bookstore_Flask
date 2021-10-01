@@ -1,3 +1,4 @@
+import os
 from flask import Flask,redirect,render_template,url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -13,8 +14,9 @@ app = Flask(__name__)
 photos = UploadSet('photos', IMAGES)
 
 app.config['UPLOADED_PHOTOS_DEST'] = 'images'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trendy.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir,'data.sqlite')
+app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'mysecret'
 
@@ -60,6 +62,17 @@ def book(id):
     form = AddToCart()
 
     return render_template('view-book.html', book=book, form=form)
+
+@app.route('/add-to-cart', methods=['POST'])
+def add_to_cart():
+    form = AddToCart()
+
+    if form.validate_on_submit():
+
+        print(form.quantity.data)
+        print(form.id.data)
+
+    return redirect(url_for('index'))
 
 @app.route('/admin')
 def admin():
